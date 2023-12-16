@@ -8,4 +8,5 @@
 
 ## usage:
  ./serve -host '0.0.0.0' -port 2000 -folder Picure/
- or get more information with ./server --help
+
+ Or get more information with ./serve --help
