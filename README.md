@@ -7,6 +7,6 @@
 
 
 ## usage:
- ./serve -host '0.0.0.0' -port 2000 -folder Picure/
+ ./serve -host '0.0.0.0' -port 2000 -folder pipebomb/
 
  Or get more information with ./serve --help
