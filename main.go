@@ -34,11 +34,12 @@ func main() {
 			}
 
 			var htmlContent strings.Builder
-			htmlContent.WriteString(fmt.Sprintf(
-				"<head>\n" +
-					"<meta charset='UTF-8'>" +
-					"    <link rel=\"stylesheet\" type=\"text/css\" href=\"/style.css\">\n" +
-					"    <style>" + `
+			htmlContent.WriteString(fmt.Sprintf(`
+				<head>\n
+					<meta charset='UTF-8'>
+					<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+					 <style>
 					body {
 						font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 						color: rgb(240, 240, 240);
@@ -70,9 +71,9 @@ func main() {
 					}
 					
 					
-					` + "</style>" +
-					"</head>\n",
-			))
+					</style>
+					</head>
+			`))
 
 			htmlContent.WriteString(fmt.Sprintf("<h1>index of %s</h1>", requestedPath))
 			htmlContent.WriteString("<div class='container'><ul>")
