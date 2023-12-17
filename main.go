@@ -25,6 +25,9 @@ func main() {
 	listHandler := func(ctx *fasthttp.RequestCtx) {
 		requestedPath := string(ctx.Path())
 		fullPath := filepath.Join(*folder, requestedPath)
+		ip := ctx.RemoteAddr().String()
+		method := ctx.Method()
+		log.Printf("Request from IP %s: %s %s", ip, method, ctx.Path())
 
 		if fileInfo, err := os.Stat(fullPath); err == nil && fileInfo.IsDir() {
 			fileInfos, err := os.ReadDir(fullPath)
