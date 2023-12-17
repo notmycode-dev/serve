@@ -29,6 +29,7 @@ func main() {
 		if fileInfo, err := os.Stat(fullPath); err == nil && fileInfo.IsDir() {
 			fileInfos, err := os.ReadDir(fullPath)
 			if err != nil {
+				log.Printf("Error reading directory %s: %s", fullPath, err)
 				ctx.Error(fmt.Sprintf("Error reading directory: %s", err), fasthttp.StatusInternalServerError)
 				return
 			}
@@ -87,7 +88,6 @@ func main() {
 					htmlContent.WriteString(fmt.Sprintf("<div><span>📄</span><a class='file' href='%s'>%s</a></div>", filepath.Join(requestedPath, name), name))
 				}
 				htmlContent.WriteString("</li>")
-
 			}
 			htmlContent.WriteString("</ul></div>")
 
@@ -96,6 +96,7 @@ func main() {
 		} else {
 			fileContent, err := ioutil.ReadFile(fullPath)
 			if err != nil {
+				log.Printf("Error reading file %s: %s", fullPath, err)
 				ctx.Error(fmt.Sprintf("Error reading file: %s", err), fasthttp.StatusInternalServerError)
 				return
 			}
@@ -108,6 +109,7 @@ func main() {
 
 			ctx.Write(fileContent)
 		}
+		log.Printf("Request processed: %s %s", ctx.Method(), requestedPath)
 	}
 
 	requestHandlerWrapper := func(ctx *fasthttp.RequestCtx) {
@@ -115,7 +117,7 @@ func main() {
 	}
 
 	addr := fmt.Sprintf("%s:%d", *host, *port)
-	fmt.Printf("Server is listening on %s...\n", addr)
+	log.Printf("Server is listening on %s...\n", addr)
 	if err := fasthttp.ListenAndServe(addr, requestHandlerWrapper); err != nil {
 		log.Fatalf("Error in ListenAndServe: %s", err)
 	}
