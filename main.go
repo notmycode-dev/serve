@@ -35,7 +35,7 @@ func main() {
 
 			var htmlContent strings.Builder
 			htmlContent.WriteString(fmt.Sprintf(`
-				<head>\n
+				<head>
 					<meta charset='UTF-8'>
 					<meta name="viewport" content="width=device-width, initial-scale=1" />
 
